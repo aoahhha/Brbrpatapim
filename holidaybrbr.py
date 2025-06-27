@@ -71,7 +71,6 @@ class JasonVoorhees(HolidayCharacter):
     def check_present(self, present):
         if present.lower() in [p.lower() for p in self.present]:
             return f"Jason clenches his fists and presents a {present}🎁"
-        return "Jason stares blankly... then offers an ominous thumbs-up 👍"
 
     def interact(self):
         name = input("Who dares to approach me!? ")
