@@ -3,7 +3,7 @@ This file will be modified when I add tests...
 # 🎉 Holiday Character Interactive Game
 
 This is a fun and interactive Python terminal game where you can meet and interact with holiday-themed characters 
-like Santa Claus, Jason Voorhees**, Saint Patrick, and the Easter Bunny. 
+like Santa Claus, Jason Voorhees, Saint Patrick, and the Easter Bunny. 
 Each character has unique behaviors and dialogue based on the month they are associated with.
 
 ## 📜 Features
