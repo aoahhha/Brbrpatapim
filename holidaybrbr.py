@@ -31,6 +31,33 @@ class Santa(HolidayCharacter):
             return f"{name} is not on any list... yet.🕵️‍♂️"
 
 
+class JasonVoorhees(HolidayCharacter):
+    def __init__(self):
+        super().__init__()
+        self.character_name = "Jason Voorhees"
+        self.victims = []
+        self.present = ["Blood Splatter Coffee Mug", "Glow-in-the-DarkJason Voorhees mask", "candy", "mini liquor bottles"]
+        self.relevant_months = [10]
+
+
+    def action(self, action_name):
+        actions = {
+            "stalk": "Chh... chhh... chha, ha, ha ,ha",
+            "appear": "Jason suddenly appears from the darkness!",
+            "chase": "Running after victim with machete",
+            "give present": "Giving present to my friend"
+        }
+        return actions.get(action_name.lower(), "*Silent heavy breathing*")
+
+    def add_victim(self, name):
+        self.victims.append(name)
+        return f"{name} has been added to Jason's victim list!"
+
+    def check_present(self, present):
+        if present.lower() in [p.lower() for p in self.presents]:
+            return "Jason clenches his fists and presents a {present}🎁"
+        return "Jason stares blankly... then offers an ominous thumbs-up 👍"
+
 
 
 
