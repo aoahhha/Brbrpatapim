@@ -54,10 +54,39 @@ class JasonVoorhees(HolidayCharacter):
         return f"{name} has been added to Jason's victim list!"
 
     def check_present(self, present):
-        if present.lower() in [p.lower() for p in self.presents]:
+        if present.lower() in [p.lower() for p in self.present]:
             return "Jason clenches his fists and presents a {present}🎁"
         return "Jason stares blankly... then offers an ominous thumbs-up 👍"
 
+
+
+class StPatrick(HolidayCharacter):
+    def __init__(self):
+        super().__init__()
+        self.character_name = "Saint Patrick"
+        self.relevant_months = [3]
+        self.irish_blessings = [
+            "May your pockets be heavy and your heart be light",
+            "May good luck be with you every day",
+            "Slainte!"
+        ]
+        self.shamrocks = 0
+
+
+
+    def action(self, action_name):
+        actions = {
+            "banish snakes": "All snakes are fleeing Ireland!",
+            "teach": "Using this shamrock ☘️ to explain the Holy Trinity",
+            "parade": "Leading a lively Celtic procession",
+            "rainbow": "Looking for a big pot of Gold!"
+        }
+        return actions.get(action_name.lower(), "Praying quietly")
+
+
+    def add_shamrock(self):
+        self.shamrocks += 1
+        return f"Snakes banished: {self.shamrocks}"
 
 
 
