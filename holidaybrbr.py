@@ -1,3 +1,5 @@
+import random
+
 class HolidayCharacter:
     def __init__(self):
         self.relevant_months = []
@@ -55,15 +57,12 @@ class JasonVoorhees(HolidayCharacter):
         self.present = ["Blood Splatter Coffee Mug", "Glow-in-the-DarkJason Voorhees mask", "candy", "mini liquor bottles"]
         self.relevant_months = [10]
 
-
-    def action(self, action_name):
-        actions = {
+        self.actions = {
             "stalk": "Chh... chhh... chha, ha, ha ,ha",
             "appear": "Jason suddenly appears from the darkness!",
             "chase": "Running after victim with machete",
             "give present": "Giving present to my friend"
-        }
-        return actions.get(action_name.lower(), "*Silent heavy breathing*")
+    }
 
     def add_victim(self, name):
         self.victims.append(name)
@@ -71,8 +70,16 @@ class JasonVoorhees(HolidayCharacter):
 
     def check_present(self, present):
         if present.lower() in [p.lower() for p in self.present]:
-            return "Jason clenches his fists and presents a {present}🎁"
+            return f"Jason clenches his fists and presents a {present}🎁"
         return "Jason stares blankly... then offers an ominous thumbs-up 👍"
+
+    def interact(self):
+        name = input("Who dares to approach me!? ")
+        print(self.add_victim(name))
+        print(self.action("appear"))
+        gift = random.choice(self.present)
+        print(self.check_present(gift))
+
 
 
 
@@ -88,21 +95,24 @@ class StPatrick(HolidayCharacter):
         ]
         self.shamrocks = 0
 
-
-
-    def action(self, action_name):
-        actions = {
+        self.actions = {
             "banish snakes": "All snakes are fleeing Ireland!",
-            "teach": "Using this shamrock ☘️ to explain the Holy Trinity",
-            "parade": "Leading a lively Celtic procession",
-            "rainbow": "Looking for a big pot of Gold!"
-        }
-        return actions.get(action_name.lower(), "Praying quietly")
+            "tell": "Using this shamrock ☘️ to explain the Holy Trinity",
+            "rainbow": "Looking for a big pot of Gold!",
+            "bless": self.bless
+    }
 
+    def bless(self):
+        return random.choice(self.irish_blessings)
 
     def add_shamrock(self):
         self.shamrocks += 1
         return f"Snakes banished: {self.shamrocks}"
+
+    def interact(self):
+        print(self.action("tell"))
+        print(self.add_shamrock())
+        print("Blessing: " + self.bless())
 
 
 
@@ -116,14 +126,12 @@ class EasterBunny(HolidayCharacter):
         self.basket = ["Chocolate eggs", "Jelly beans",
                        "Marshmallow", "Colorful stickers"]
 
-    def action(self, action_name):
-        actions = {
+        self.actions = {
             "hide eggs": "Hiding eggs in the garden!",
             "hop": "hop, hop, hop",
             "crunch carrot": "Crunching carrots! Mmmm xD",
             "deliver basket": "Leaving an Easter basket by your doorstep"
     }
-        return actions.get(action_name.lower(), "Wiggles nose curiously")
 
     def hide_eggs(self, count):
         self.eggs_hidden += count
@@ -136,19 +144,41 @@ class EasterBunny(HolidayCharacter):
     def check_basket(self):
         return f"Basket contains {', '.join(self.basket)}"
 
-    def holiday_game():
-        characters = [Santa(), JasonVoorhees(), StPatrick(), EasterBunny()]
-        print("Welcome to the Holiday World! Choose a character to interact with:")
+    def interact(self):
+        print(self.action("hop"))
+        print(self.hide_eggs(random.randint(1, 5)))
+        print(self.eat_carrot())
+        print(self.check_basket())
+
+def holiday_game():
+    characters = [Santa(), JasonVoorhees(), StPatrick(), EasterBunny()]
+
+    while True:
+        print("\nWelcome to the Holiday World! Choose a character to interact with:")
         for i, char in enumerate(characters):
             print(f"{i + 1}. {char.character_name}")
+        print("5. Start again")
+        print("6. Exit")
 
-        choice = int(input("Enter your choice (1-4): ")) - 1
+        try:
+            choice = int(input("Enter your choice (1-6): ")) - 1
+        except ValueError:
+            print("Invalid input. Please enter a number: ")
+            continue
+
         if 0 <= choice < len(characters):
             character = characters[choice]
             print(f"\nYou selected {character.character_name}!\n")
             character.interact()
+        elif choice == 4:
+            print("Restarting game...")
+            continue
+        elif choice == 5:
+            print("Bye!")
+            break
         else:
-            print("Invalid choice.")
+            print("Please choose a number between 1 and 6.")
+
 
 if __name__ == "__main__":
     holiday_game()
