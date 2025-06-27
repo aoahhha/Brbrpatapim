@@ -90,4 +90,40 @@ class StPatrick(HolidayCharacter):
 
 
 
+class EasterBunny(HolidayCharacter):
+    def __init__(self):
+        super().__init__()
+        self.character_name = "Easter Bunny"
+        self.relevant_months = [4]
+        self.eggs_hidden = 0
+        self.carrots_eaten = 0
+        self.basket = ["Chocolate eggs", "Jelly beans",
+                       "Marshmallow", "Colorful stickers"]
+
+    def action(self, action_name):
+        actions = {
+            "hide eggs": "Hiding eggs in the garden!",
+            "hop": "hop, hop, hop",
+            "crunch carrot": "Crunching carrots! Mmmm xD",
+            "deliver basket": "Leaving an Easter basket by your doorstep"
+    }
+        return actions.get(action_name.lower(), "Wiggles nose curiously")
+
+    def hide_eggs(self, count):
+        self.eggs_hidden += count
+        return f"Hidden {count} eggs! Total hidden: {self.eggs_hidden}"
+
+    def eat_carrot(self):
+        self.carrots_eaten += 1
+        return f"Nom nom! Carrots eaten today: {self.carrots_eaten}"
+
+    def check_basket(self):
+        return f"Basket contains {', '.join(self.basket)}"
+
+
+
+
+
+
+
 
