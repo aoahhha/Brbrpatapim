@@ -2,8 +2,16 @@ class HolidayCharacter:
     def __init__(self):
         self.relevant_months = []
         self.character_name = "Holiday Character"
+        self.actions = {}
+
     def is_character_relevant(self, month):
         return month in self.relevant_months
+
+    def action(self, action_name):
+        return self.actions.get(action_name.lower(), f"{self.character_name} undefined action")
+
+    def interact(self):
+        print(f"You meet {self.character_name}")
 
 
 class Santa(HolidayCharacter):
@@ -13,14 +21,12 @@ class Santa(HolidayCharacter):
         self.naughty_list = []
         self.nice_list = []
         self.relevant_months = [12]
-
-    def action(self, action_name):
-        action = {"deliver gifts": "Ho ho ho! Delivering presents to you",
-                  "eat cookies": "Mmmm love these cookies",
-                  "ride sleigh": "Love riding my new sleigh",
-                  "gifting present": "Here, take this little one"
-                  }
-        return action.get(action_name.lower(), "Santa is revising gift quota")
+        self.actions = {
+        "deliver gifts": "Ho ho ho! Delivering presents to you",
+        "eat cookies": "Mmmm love these cookies",
+        "ride sleigh": "Love riding my new sleigh",
+        "gifting present": "Here, take this little one"
+    }
 
     def check(self, name):
         if name.lower() in [n.lower() for n in self.naughty_list]:
@@ -29,6 +35,16 @@ class Santa(HolidayCharacter):
             return f"{name} is on the Nice List!🎁✨"
         else:
             return f"{name} is not on any list... yet.🕵️‍♂️"
+
+    def interact(self):
+        name = input("What's your name? ")
+        behavior = input("Were you nice or naughty this year? ").strip().lower()
+        if behavior == "nice":
+            self.nice_list.append(name)
+        elif behavior == "naughty":
+            self.naughty_list.append(name)
+        print(self.check(name))
+        print(self.action("deliver gifts"))
 
 
 class JasonVoorhees(HolidayCharacter):
@@ -120,10 +136,20 @@ class EasterBunny(HolidayCharacter):
     def check_basket(self):
         return f"Basket contains {', '.join(self.basket)}"
 
+    def holiday_game():
+        characters = [Santa(), JasonVoorhees(), StPatrick(), EasterBunny()]
+        print("Welcome to the Holiday World! Choose a character to interact with:")
+        for i, char in enumerate(characters):
+            print(f"{i + 1}. {char.character_name}")
 
+        choice = int(input("Enter your choice (1-4): ")) - 1
+        if 0 <= choice < len(characters):
+            character = characters[choice]
+            print(f"\nYou selected {character.character_name}!\n")
+            character.interact()
+        else:
+            print("Invalid choice.")
 
-
-
-
-
+if __name__ == "__main__":
+    holiday_game()
 
