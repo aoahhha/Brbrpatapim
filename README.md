@@ -1,5 +1,3 @@
-This file will be modified when I add tests...
-
 # 🎉 Holiday Character Interactive Game
 
 This is a fun and interactive Python terminal game where you can meet and interact with holiday-themed characters 
@@ -12,3 +10,8 @@ Each character has unique behaviors and dialogue based on the month they are ass
 - 🪓 Jason Voorhees — scary interactions with horror elements and surprise presents.
 - 🍀 Saint Patrick — Irish blessings, shamrocks, and banishing snakes!
 - 🐰 Easter Bunny — hiding eggs, munching carrots, and Easter basket goodies.
+
+###
+
+To run tests via terminal python -m unittest test_holiday_characters.py
+Otherwise Good luck 🍀
